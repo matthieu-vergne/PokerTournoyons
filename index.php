@@ -1,15 +1,22 @@
 <?php
 //Entrées
-$Partie=$_REQUEST['Game']; //On récupère le nom de partie
-$MoveId=$_REQUEST['MoveId']; //On récupère le MoveId
-$Arbitre=$_REQUEST['Referee']; //On récupère l'URL de l'arbitre
+$game = $_REQUEST['Game']; //On récupère le nom de partie
+$moveId = $_REQUEST['MoveId']; //On récupère le MoveId
+$referee = $_REQUEST['Referee']; //On récupère l'URL de l'arbitre
+
 //Elaboration du jeu
-$Valeur=mt_rand(1,3);
+$value = mt_rand(1,3);
+
 //On choisit son coup
+
 //Sorties : On construit l'URL cible
-if ($Arbitre=='') {print $Valeur;} else {
-$URL=$Arbitre.'?Game='.$Partie.'&MoveId='.$MoveId.'&Value='.$Valeur;
-fopen($URL,"r"); }
+$url = "$referee?Game=$game&MoveId=$moveId&Value=$value";
+
 //On transmet à l'arbitre
+if ($referee=='') {
+	print $value;
+} else {
+	fopen($url,"r");
+}
 //si fopen pose problème, essayer readfile()
 ?>
