@@ -81,6 +81,8 @@ if ($referee == null) {
 	$time = date('Y-m-d H:i:s', filemtime(__FILE__));
 	$commit = htmlspecialchars(exec('git log -1 --pretty=format:"%h - %s"'));
 	$source = $_SERVER['QUERY_STRING'];
+	echo "Value: $value<br/>";
+	echo "<br/>";
 	echo "($time - $commit)<br/>";
 	echo "<br/>";
 	echo "Gains: ".print_r($gains, true)."<br/>";
@@ -99,8 +101,6 @@ if ($referee == null) {
 	echo "Opponent: $opponent<br/>";
 	echo "Set: $set<br/>";
 	echo "Timeout: $timeout<br/>";
-	echo "<br/>";
-	echo "Value: $value<br/>";
 } else {
 	$url = "$referee?Game=$game&MoveId=$moveId&Login=$login&Value=$value";
 	fopen($url,"r");
