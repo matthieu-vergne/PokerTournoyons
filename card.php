@@ -17,7 +17,8 @@ class Card {
 	const V_JACK = 'J';
 	const V_QUEEN = 'Q';
 	const V_KING = 'K';
-	const V_AS = 'A';
+	const V_AS = 'A';// specifications
+	const V_AS2 = '1';// tester
 	
 	const UNKNOWN = '?';
 	
@@ -64,6 +65,7 @@ class Card {
 			case Card::V_QUEEN:
 			case Card::V_KING:
 			case Card::V_AS:
+			case Card::V_AS2:
 			case Card::UNKNOWN:
 				$this->rank = $rank;
 				break;
