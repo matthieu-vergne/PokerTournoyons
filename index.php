@@ -47,10 +47,13 @@ $referee = $getParameter('Referee');
 $set = $getParameter('Set');
 $timeout = $getParameter('TimeOut');
 
-$rank = substr($tray, 0, 2);
+$rank = (int) substr($tray, 0, 2);
 $dealer = (($rank+1) % 2)+1;
 $resultedTurns = substr($tray, 2, 2);
 $step = substr($tray, 4, 1);
+$isDealer = in_array($step, array(1, 4, 6, 8));
+$myPlayer = $isDealer ? $dealer : ($dealer % 2) + 1;
+$isFirstToBet = in_array($step, array(1, 3, 5, 7));
 $cards = array();
 $cards[1][1] = new Card(substr($tray, 5, 2));
 $cards[1][2] = new Card(substr($tray, 7, 2));
@@ -61,10 +64,9 @@ $trayCards = array();
 for($i = 13 ; $i < $betStart ; $i += 2) {
 	$trayCards[] = new Card(substr($tray, $i, 2));
 }
-$isFirstToBet = substr($tray, $betStart + 1, 1) == '?';
-$betStart += $isFirstToBet ? 2 : 1;
+$betStart ++;
 $bets = array();
-$split = explode('-', substr($tray, $betStart));
+$split = explode('-', str_replace('?', '', substr($tray, $betStart)));
 $bets[1] = $split[0];
 $bets[2] = $split[1];
 
@@ -88,6 +90,7 @@ if ($referee == null) {
 	echo "Gains: ".Format::arrayWithKeysToString($gains)."<br/>";
 	echo "Game: $game<br/>";
 	echo "Rank: $rank (dealer $dealer)<br/>";
+	echo "Player: $myPlayer (dealer? ".($isDealer ? 'Yes' : 'No').")<br/>";
 	echo "Resulted turns: $resultedTurns<br/>";
 	echo "Step: $step<br/>";
 	echo "Cards 1: ".Format::arrayToString($cards[1])."<br/>";
