@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+<meta name="robots" content="noindex">
+<link href="accueil_index_data/css.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="poker_interface_data/deplace.js"></script>
+<script language="javascript">
+BASEMISE_1=20
+BASEMISE_2=500
+BASEMOINS_1=140
+BASEMOINS_2=533
+BASESUIVRE=140
+TLMISE=170
+var BaseMise=0;
+var Muet=false;
+var NomJoueur1="Joueur Un"
+var NomJoueur2="Joueur Deux"
+var Mess="";
+var EnSaisie=false;
+var EnMoveCurseur=false;
+var Interfacage='none'
+var IsPremier=true;
+var LaLegende='';
+var Langue='';
+var URLRetour='';
+var Webmaster_Joue=false;
+var WebTest=false;
+var Carte1Premier='';
+var Carte2Premier='';
+var Carte1Second='';
+var Carte2Second='';
+var Carte1='';
+var Carte2='';
+var Carte3='';
+var Carte4='';
+var Carte5='';
+var Mise1='';
+var Mise2='';
+var MiseEnSecond=false;
+var MiseInit=0;
+var MiseSaisie=0;
+var MiseSuivre=0;
+var NbCoups='';
+var ScoreJoueur1=0;
+var ScoreJoueur2=0;
+
+function Affiche() {	
+	if (!Muet) {document.getElementById("LeSon").innerHTML=' <object type="application/ogg" data="poc.ogg" width="0" height="0"> </object>'	}
+	document.getElementById("ImgCarteJ1_1").src=Carte1Premier
+	document.getElementById("ImgCarteJ1_2").src=Carte2Premier
+	document.getElementById("ImgCarteJ2_1").src=Carte1Second
+	document.getElementById("ImgCarteJ2_2").src=Carte2Second
+	if (Carte1 != '') {
+		document.getElementById("ImgCarte_1").src=Carte1
+		document.getElementById("ImgCarte_2").src=Carte2
+		document.getElementById("ImgCarte_3").src=Carte3
+		document.getElementById("DivCarte_1").style.visibility="visible"
+		document.getElementById("DivCarte_2").style.visibility="visible"
+		document.getElementById("DivCarte_3").style.visibility="visible"
+		if (Carte4 != '') {
+			document.getElementById("ImgCarte_4").src=Carte4
+			document.getElementById("DivCarte_4").style.visibility="visible"
+			if (Carte5 != '') {
+				document.getElementById("ImgCarte_5").src=Carte5
+				document.getElementById("DivCarte_5").style.visibility="visible"
+			} else {
+				document.getElementById("DivCarte_5").style.visibility="hidden"				
+			}
+		} else {
+			document.getElementById("DivCarte_4").style.visibility="hidden"	
+			document.getElementById("DivCarte_5").style.visibility="hidden"			
+		}
+	} else {
+		document.getElementById("DivCarte_1").style.visibility="hidden"
+		document.getElementById("DivCarte_2").style.visibility="hidden"
+		document.getElementById("DivCarte_3").style.visibility="hidden"
+		document.getElementById("DivCarte_4").style.visibility="hidden"
+		document.getElementById("DivCarte_5").style.visibility="hidden"
+	}
+	document.getElementById("MiseJoueur1").innerHTML=Mise1
+	document.getElementById("MiseJoueur2").innerHTML=Mise2
+	if (EnSaisie) {
+		if (IsPremier) {BaseMise=BASEMISE_1;BaseMoins=BASEMOINS_1} else {BaseMise=BASEMISE_2;BaseMoins=BASEMOINS_2}
+		if (IsPremier) {MisePrec=Mise1;MiseSuivre=Mise2;} else {MisePrec=Mise2;MiseSuivre=Mise1}
+		if (MisePrec=='1') {MiseInit=3} else {MiseInit=1+(1*MisePrec)}
+		if (MiseInit<MiseSuivre) {MiseInit=MiseSuivre}
+		MiseSaisie=MiseInit
+		AfficheCurseurMise(MiseInit)
+		LeftBTMoins=BaseMoins;LeftBTPlus=BaseMoins+24;
+		document.getElementById("BTPlus").style.visibility='visible'
+		document.getElementById("BTMoins").style.visibility='visible'
+		document.getElementById("BTPlus").style.left=LeftBTPlus+'px'
+		document.getElementById("BTMoins").style.left=LeftBTMoins+'px'
+		document.getElementById("BarreBleue").style.left=BaseMise+'px'
+		document.getElementById("BarreGrise").style.left=BaseMise+'px'
+		document.getElementById("BTCouche").style.left=BaseMise+'px'
+		LeftBTOK=BaseMise+TLMISE+10
+		document.getElementById("BTOK").style.left=LeftBTOK+'px'
+		document.getElementById("BarreGrise").style.width=TLMISE+'px'
+		document.getElementById("BarreBleue").style.visibility='visible'
+		document.getElementById("BarreGrise").style.visibility='visible'
+		document.getElementById("Curseur").style.visibility='visible'
+		document.getElementById("BTOK").style.visibility='visible'	
+		document.getElementById("BTOK").disabled=false		
+		document.getElementById("BTCouche").value=TXT_COUCHE+MisePrec
+		document.getElementById("BTCouche").style.visibility='visible'
+
+		if (MiseEnSecond) {
+			LeftBTSuivre=BaseMise+BASESUIVRE
+			document.getElementById("BTSuivre").style.left=LeftBTSuivre+'px'
+			document.getElementById("BTSuivre").value=TXT_SUIVRE
+			document.getElementById("BTSuivre").style.visibility='visible'
+		}
+	} else {
+		document.getElementById("BarreBleue").style.visibility='hidden'
+		document.getElementById("BarreGrise").style.visibility='hidden'
+		document.getElementById("Curseur").style.visibility='hidden'
+		document.getElementById("BTOK").style.visibility='hidden'
+		document.getElementById("BTCouche").style.visibility='hidden'
+		document.getElementById("BTSuivre").style.visibility='hidden'
+		document.getElementById("BTPlus").style.visibility='hidden'
+		document.getElementById("BTMoins").style.visibility='hidden'		
+	}
+	if (EnSaisie) {if (IsPremier) {
+		LeNomJoueur1='<u>'+NomJoueur1+'</u>';LeNomJoueur2=NomJoueur2}
+		else {LeNomJoueur2='<u>'+NomJoueur2+'</u>';LeNomJoueur1=NomJoueur1}}
+	else {LeNomJoueur1=NomJoueur1;LeNomJoueur2=NomJoueur2}
+	document.getElementById("Joueur1").innerHTML=LeNomJoueur1
+	document.getElementById("Joueur2").innerHTML=LeNomJoueur2	
+	document.getElementById("Score1").innerHTML=ScoreJoueur1
+	document.getElementById("Score2").innerHTML=ScoreJoueur2
+	document.getElementById("Tirage").innerHTML=TXT_COUP+NbCoups+'<BR>'+NbCoupsAboutis+TXT_ABOUTIS;
+}	
+
+function AfficheCurseurMise(UneMise) {
+	TlBleu=8+Math.ceil((TLMISE*UneMise)/100)
+	document.getElementById("BarreBleue").style.width=TlBleu+'Px';
+	PosCurseur=BaseMise+Math.ceil(((TLMISE-8)*UneMise)/100)
+	document.getElementById("Curseur").style.left=PosCurseur+'px';
+	if (IsPremier) {
+		document.getElementById("MiseJoueur1").innerHTML=UneMise
+	} else {
+		document.getElementById("MiseJoueur2").innerHTML=UneMise
+	}
+}
+
+function Affiche_Vide () {
+	document.getElementById("Joueur1").innerHTML='&nbsp;'
+	document.getElementById("Joueur2").innerHTML='&nbsp;'	
+	document.getElementById("DivPlateau").style.visibility='hidden';	
+	document.getElementById("Legende").innerHTML='';
+}
+
+function AppelLocal(Query) {
+	//alert('Interface:'+Query)
+	var EnInit=false;
+	var QueryNoms=new Array();
+	var QueryValeurs=new Array();
+	var QueryNombre=0;	
+	if (Query.indexOf('=') > 0) {
+		Params = Query.split("&");  
+		QueryNombre=Params.length
+		for (i = 0; i < QueryNombre; i++) {  
+		  Pos = Params[i].indexOf("=");  
+		  QueryNoms[i]=Params[i].substring(0,Pos).toLowerCase()
+		  QueryValeurs[i]=Params[i].substring(Pos+1)
+		  //alert(i+' ' +QueryNoms[i]+'='+QueryValeurs[i])	
+		}
+		Interfacage='standard'
+		Muet=false
+		Carte1Premier='';
+		Carte2Premier='';
+		Carte1Second='';
+		Carte2Second='';
+		Carte1='';
+		Carte2='';
+		Carte3='';
+		Carte4='';
+		Carte5='';
+		LaLegende='&nbsp;';
+		for (i = 0; i < QueryNombre; i++) {  
+			Valeur=QueryValeurs[i]	
+			switch(QueryNoms[i]) {	
+				case 'gain1' : ScoreJoueur1=Valeur;break;
+				case 'gain2' : ScoreJoueur2=Valeur;break;					
+				case 'input' : EnSaisie=true;IsPremier=(Valeur.toLowerCase()=='one');break;
+				case 'legend': LaLegende="<SPAN Style='color: #1990c7;font-size:24x;font-weight:bold;'>"+unescape(Valeur)+"</SPAN>";break;
+				case 'method': Interfacage=Valeur.toLowerCase();break;					
+				case 'mute' : Muet=true;break;
+				case 'name1' : NomJoueur1=unescape(Valeur);break;
+				case 'name2' : NomJoueur2=unescape(Valeur);break;
+				case 'tray': 
+					Tray=unescape(Valeur)
+					Taille=Tray.length
+					if (Taille>=0) {
+						if (Tray.substring(0,1)=='0') {NbCoups=Tray.substring(1,2)} else {NbCoups=Tray.substring(0,2)}
+						if (Tray.substring(2,3)=='0') {NbCoupsAboutis=Tray.substring(3,4)} else {NbCoupsAboutis=Tray.substring(2,4)}
+						Etape=Tray.substring(4,5)
+						Carte1Premier=Illustre(Tray.substring(5,7),true)
+						Carte2Premier=Illustre(Tray.substring(7,9),true)
+						Carte1Second=Illustre(Tray.substring(9,11),true)
+						Carte2Second=Illustre(Tray.substring(11,13),true)
+						PosM=Tray.indexOf('M')
+						if (PosM > 0){
+							Plateau=Tray.substring(13,PosM)
+							Taille=Plateau.length
+							if (Taille>0) {
+								Carte1=Illustre(Plateau.substring(0,2),false)
+								Carte2=Illustre(Plateau.substring(2,4),false)
+								Carte3=Illustre(Plateau.substring(4,6),false)	
+								if (Taille>=7) {
+									Carte4=Illustre(Plateau.substring(6,8),false)
+									if (Taille>=9) {
+										Carte5=Illustre(Plateau.substring(8,10),false)
+									}
+								}
+							}
+							Mise=Tray.substring(PosM+1)
+							PosT=Mise.indexOf('-')
+							PosPI=Mise.indexOf('?')
+							if (PosPI<0) {
+								MiseEnSecond=false
+								Mise1=Mise.substring(0,PosT)
+								Mise2=Mise.substring(PosT+1)
+							} else {
+								MiseEnSecond=true
+								if (PosPI>PosT) {
+									Mise1=Mise.substring(0,PosT)
+									Mise2=Mise.substring(PosPI+1)								
+								} else {
+									Mise1=Mise.substring(1,PosT)
+									Mise2=Mise.substring(PosT+1)
+								}
+							}
+						}
+					}
+					break;							
+				case 'urlreturn' : URLRetour=Valeur;break;
+				case 'l' : Langue=Valeur;break;
+	
+			}
+		}
+		switch (Langue) {
+			case 'fr':
+			default:
+				TXT_COUP='Coup ';TXT_ABOUTIS=' aboutis';
+				TXT_COUCHE='Je me couche : - '
+				TXT_SUIVRE='Je suis'
+				break;	
+		}		
+		switch(Interfacage) {
+			case 'end' : 
+				document.getElementById("DivPlateau").className='DivPlateau';	
+				document.getElementById("Legende").innerHTML=LaLegende;
+				Affiche();
+				break;			
+			case 'none' : Affiche_Vide();break;	
+			case 'standard' : 
+				document.getElementById("DivPlateau").className='DivPlateau';	
+				document.getElementById("Legende").innerHTML=LaLegende;
+				Affiche()
+				break;		
+		}
+	} else {
+		Affiche_Vide()
+	}
+}
+
+function Illustre(Code,Grand) {
+	LeSrc="images/"
+	if (Code=='??') {LeSrc+='XX'} else {LeSrc+=Code}
+	if (Grand) {LeSrc+='_G.png'} else {LeSrc+='.png'}
+	return(LeSrc)
+}
+function Init() {
+	Query = window.location.search.substring(1);  	
+	AppelLocal(Query)
+}
+
+function Input() {
+	OK=true;
+	if (IsPremier) {Mise1=MiseSaisie;MiseAutre=Mise2} else {Mise2=MiseSaisie;MiseAutre=Mise1}
+	if (MiseEnSecond) {
+		if (MiseSaisie<MiseAutre) {
+			OK=false;alert('Vous devez miser autant que votre adversaire (suivre) ou plus (relancer)');
+		}
+	} else {
+		if (MiseSaisie<=MiseAutre) {
+			OK=false;alert('Votre mise doit être supérieure aux mises précédentes de votre adversaire');
+		}
+	}
+	if (OK) {
+		EnSaisie=false
+		document.getElementById("Retour").src=URLRetour+'?ReturnValue='+MiseSaisie	
+	}
+	Affiche()
+}
+
+function Input_Couche() {
+	MiseSaisie=MiseInit
+	EnSaisie=false
+	document.getElementById("Retour").src=URLRetour+'?ReturnValue=-1'		
+	Affiche()
+}
+
+function Input_Fin() { //appellé par successif
+	EnSaisie=false
+	document.getElementById("BtSuiv").disabled=true
+	document.getElementById("Retour").src=URLRetour+'?ReturnValue=0'	
+	Affiche()
+}
+
+function Input_Suit() {
+	MiseSaisie=MiseSuivre
+	Input()
+}
+
+function Moins() {
+	if (MiseSaisie > MiseInit) {
+		MiseSaisie--
+		AfficheCurseurMise(MiseSaisie)
+	}
+}
+function Plus() {
+	if (MiseSaisie < 100) {
+		MiseSaisie++
+		AfficheCurseurMise(MiseSaisie)
+	}
+}
+
+function OffCurseur() {
+	document.getElementById("BTOK").disabled=false
+}
+</script>
+<style>
+td {
+font-size:1px;
+}
+table {
+margin : 0 auto;
+}
+.NoCurs {
+cursor:default;
+}
+a.Lien {
+font-family: 'Jockey One', arial, serif;
+color:#1990c7;
+line-height:0px;
+text-decoration:underline;
+}
+a.Lien:hover {
+color:#505050;
+}
+.DivPlateau {
+	background: url('images/cadre.jpg') no-repeat #ffffff;
+	background-position: top;
+	z-index:20;
+	position:relative;
+	margin-top:20px;
+	height:570px;
+
+}
+#DivCarteJ1_1{
+	position:absolute;
+	z-index:40;
+	top:124px;
+	left:80px;
+	width:100px;
+	height:100px;
+}
+#DivCarteJ1_2{
+	position:absolute;
+	z-index:50;
+	top:154px;
+	left:120px;
+	width:100px;
+	height:100px;
+}
+#DivCarteJ2_1{
+	position:absolute;
+	z-index:40;
+	top:124px;
+	left:480px;
+	width:100px;
+	height:100px;
+}
+#DivCarteJ2_2{
+	position:absolute;
+	z-index:50;
+	top:154px;
+	left:520px;
+	width:100px;
+	height:100px;
+}
+#DivCarte_1{
+	position:absolute;
+	z-index:40;
+	top:404px;
+	left:230px;
+	width:100px;
+	height:100px;
+	visibility:hidden;
+}
+#DivCarte_2{
+	position:absolute;
+	z-index:42;
+	top:404px;
+	left:270px;
+	width:100px;
+	height:100px;
+	visibility:hidden;
+}
+#DivCarte_3{
+	position:absolute;
+	z-index:44;
+	top:404px;
+	left:310px;
+	width:100px;
+	height:100px;
+	visibility:hidden;
+}
+#DivCarte_4{
+	position:absolute;
+	z-index:46;
+	top:404px;
+	left:350px;
+	width:100px;
+	height:100px;
+	visibility:hidden;
+}
+#DivCarte_5{
+	position:absolute;
+	z-index:48;
+	top:404px;
+	left:390px;
+	width:100px;
+	height:100px;
+	visibility:hidden;
+}
+#BarreBleue {
+	position:absolute;
+	top:550px;
+	left:20px;
+	width:70px;
+	height:15px;
+	z-index:130;
+	visibility:hidden;
+}
+#BarreGrise {
+	position:absolute;
+	top:550px;
+	left:20px;
+	z-index:120;
+	visibility:hidden;
+}
+#Curseur {
+	position:absolute;
+	top:544px;
+	left:80px;
+	z-index:150;
+	visibility:hidden;
+}
+#BTOK {
+	position:absolute;
+	top:544px;
+	visibility:hidden;
+}
+#BTCouche {
+	position:absolute;
+	top:584px;
+	visibility:hidden;
+}
+#BTSuivre {
+	position:absolute;
+	top:584px;
+	visibility:hidden;
+}
+#BTPlus {
+	position:absolute;
+	top:520px;
+	visibility:hidden;
+}
+#BTMoins {
+	position:absolute;
+	top:520px;
+	visibility:hidden;
+}
+#Legende {
+font-family: 'Jockey One', arial, serif;
+font-size:17px;
+color:#1990c7;
+}
+.Mise {
+font-family: 'Jockey One', arial, serif;
+font-size:38px;
+font-weight:bold;
+color:#ffffff;
+}
+.Nom {
+font-family: 'Jockey One', arial, serif;
+font-size:18px;
+font-weight:bold;
+color:#ffffff;
+}
+.Score {
+font-family:  arial, serif;
+font-size:36px;
+font-weight:bold;
+color:#000000;
+}
+#Tirage {
+font-family: arial, serif;
+font-size:12px;
+font-weight:bold;
+color:#000000;
+}
+.window-base {position: absolute;}
+.window-move {cursor: move;}
+</style>
+<meta http-equiv="PRAGMA" content="NO-CACHE" <="" head="">
+</head><body onload="Init()" bgcolor="#ffffff">
+<center>
+<div style="visibility: hidden;" id="DivPlateau">
+<table border="0">
+	<tbody><tr><td align="left" width="100px"><span class="Score" id="Score1">&nbsp;</span></td>
+		<td width="100px"></td>
+		<td align="right" width="100px"><span class="Score" id="Score2">&nbsp; </span></td></tr>
+</tbody></table>
+<table border="0">
+	<tbody><tr><td align="center" width="240px"><span class="Nom" id="Joueur1">&nbsp;</span></td>
+		<td width="140px"></td>
+		<td align="center" width="230px"><span class="Nom" id="Joueur2">&nbsp;</span></td></tr>
+</tbody></table>
+<div style="height:138px"></div>
+<span id="Tirage">&nbsp;</span>
+<div style="height:190px"></div>
+<table border="0">
+	<tbody><tr><td align="center" width="130px"><span class="Mise" id="MiseJoueur1">??</span></td>
+		<td width="270px"></td>
+		<td align="center" width="130px"><span class="Mise" id="MiseJoueur2">??</span></td></tr>
+</tbody></table>
+<div id="DivCarteJ1_1"><img id="ImgCarteJ1_1" src="poker_interface_data/XX_G.png"></div>
+<div id="DivCarteJ1_2"><img id="ImgCarteJ1_2" src="poker_interface_data/XX_G.png"></div>
+<div id="DivCarteJ2_1"><img id="ImgCarteJ2_1" src="poker_interface_data/XX_G.png"></div>
+<div id="DivCarteJ2_2"><img id="ImgCarteJ2_2" src="poker_interface_data/XX_G.png"></div>
+<div id="DivCarte_1"><img id="ImgCarte_1" src="poker_interface_data/XX.png"></div>
+<div id="DivCarte_2"><img id="ImgCarte_2" src="poker_interface_data/XX.png"></div>
+<div id="DivCarte_3"><img id="ImgCarte_3" src="poker_interface_data/XX.png"></div>
+<div id="DivCarte_4"><img id="ImgCarte_4" src="poker_interface_data/XX.png"></div>
+<div id="DivCarte_5"><img id="ImgCarte_5" src="poker_interface_data/XX.png"></div>
+<img id="BarreBleue" src="poker_interface_data/barre_bleue.jpg">
+<div id="Curseur" class="window-base"><div id="DCurseur" class="window-move"><img style="z-index:150;" src="poker_interface_data/curseur.png" border="0"></div></div>
+<img id="BarreGrise" src="poker_interface_data/barre_grise.jpg">
+<input id="BTOK" onclick="Input()" value="OK" disabled="disabled" type="button">
+<input id="BTCouche" onclick="Input_Couche()" value="Je me couche" type="button">
+<input id="BTSuivre" onclick="Input_Suit()" value="Je suis" type="button">
+<input src="poker_interface_data/bt_-.gif" id="BTMoins" onclick="Moins()" type="image"> 
+<input src="poker_interface_data/bt_.gif" id="BTPlus" onclick="Plus()" type="image">
+</div>
+
+<span id="Legende"></span>
+<div id="LeSon" style="visibility:hidden;position:absolute;top:0px;left:0px;;z-index:30"></div>
+<div style="position:absolute"><iframe id="Retour" src="poker_interface_data/a.html" frameborder="0" height="0px" width="0px"></iframe></div>
+
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+
+
+</center></body></html>

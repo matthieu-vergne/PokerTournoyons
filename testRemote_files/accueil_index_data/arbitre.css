@@ -1,0 +1,523 @@
+#conteneur {
+position: relative;
+margin-left : 0px;
+margin-right : 0px;
+text-align: center;
+background:#ffffff;
+}
+html, body {
+margin: 0; 
+background:#e8e9eb;
+font-family: 'Jockey One', arial, serif;
+color:#019fe8;
+}
+#bsponsor {
+font-family: arial, serif;
+position: relative;
+z-index: 80;
+background:#FFFFFF;
+color:#505050;
+padding:0;
+padding-top:10px;
+height:32px;
+width : 756px;
+font-size:18px;
+left : -410px;
+margin-left : 50%;
+}
+a.LienSponsor {
+color:#1990c7;
+text-decoration:underline;
+cursor:pointer;
+}
+a.LienSponsor:hover {
+color:#505050;
+}
+#menu {
+font-family: 'Jockey One', arial, serif;
+color:#019fe8;
+position: relative;
+z-index: 80;
+height:76px;
+background:#ffffff;
+padding:0;
+width : 956px;
+left : -450px;
+margin-left : 50%;
+}
+#menu ul {
+margin:0;
+padding:0;
+list-style-type:none;
+text-align:center;
+vertical-align:bottom;
+}
+#menu li {
+float:left;
+padding:0;
+background-color:#ffffff;
+color: #505050;  
+font-size:20px;
+padding-top:5px;
+}
+#menu li a {
+display:block;
+width:100px;
+color:#505050;
+text-decoration:none;
+}
+#menu li a:hover {
+color:#5fc2ee;
+}
+#menu ul li ul {
+display:none;
+}
+#menu ul li:hover ul {
+display:block;
+}
+#menu li:hover ul li {
+float:none;
+font-size:15px;
+line-height:20px;
+font-family:arial, serif;
+font-weight:bold;
+}
+#menu li ul {
+position:absolute;
+}
+#bandeau{
+background: url('images/bg_bandeaumini.jpg') repeat-x #e8e9eb;
+font-family: 'Jockey One', arial, serif;
+color:#019fe8;
+}
+#bandeaujeu{
+background: url('images/bg_bandeau2.jpg') repeat-x #e8e9eb;
+}
+#corps {
+	background: url('images/lueur_bandeaumini.jpg') no-repeat;
+	background-position: top;
+	padding:0 0 0 0;
+	margin-left: auto;
+	margin-right: auto;
+	width:990px;
+	font-family: 'Jockey One', arial, serif;
+	font-size:16px;
+}
+#corpsjeu {
+	background: url('images/lueur_bandeau2.jpg') no-repeat;
+	background-position: top;
+	padding:0 0 0 0;
+	width:990px;
+	font-family: 'Jockey One', arial, serif;
+}
+.Titre{
+font-family: 'Jockey One', arial, serif;
+font-weight:bold;
+color:#ffffff;
+font-size:36px;
+text-transform:uppercase;
+}
+.TitreSous{
+font-family: 'Jockey One', arial, serif;
+color:#ffffff;
+font-size:22px;
+}
+.Age {
+width:100px;
+text-align:right;
+display:inline;
+}
+#HeaderSpan {
+float:right;
+display: block;
+font-size:8px;
+}
+
+a.BoutonCnx {
+text-decoration:none;
+font-family: 'Jockey One', arial, serif;
+background:#5fc2ee; 
+padding: 2px 8px;
+margin-bottom:2px;
+font-size:18px;
+color:#ffffff;
+width:100px;
+
+}
+a.BoutonCnx:hover{
+background:#61cdff;
+}
+.Pseudo{
+text-decoration:none;
+font-family: arial, serif;
+font-size:18px;
+color:#5fc2ee;
+font-weight:bold;
+margin-top:6px;	
+text-align:center;
+width:100px;
+}
+a.Bouton, a.BoutonDis {
+text-decoration:none;
+font-family: 'Jockey One', arial, serif;
+background:#5fc2ee; 
+height: 36px;
+padding: 8px 18px;
+font-size:21px;
+font-weight:bold;	
+color:#ffffff;
+display: block;
+background:#5fc2ee;
+text-align: left;
+}
+a.Bouton:hover, a.Bouton:active {
+background:#61cdff;
+}
+a.BoutonDis:link, a.BoutonDis:visited, a.BoutonDis:hover, a.BoutonDis:active {
+background: #f2f3f5;
+cursor: default;
+}
+
+a.BoutonJeu, a.BoutonJeuDis {
+text-decoration:none;
+font-family: 'Jockey One', arial, serif;
+background:#5fc2ee; 
+height:24px;
+padding-top:4px;
+padding-left:14px;
+font-size:14px;
+color:#ffffff;
+display: block;
+text-align: left;
+width:142px;
+}
+a.BoutonJeu:hover, a.BoutonJeu:active {
+background:#61cdff;
+}
+a.BoutonJeuDis:link, a.BoutonJeuDis:visited, a.BoutonJeuDis:hover, a.BoutonJeuDis:active {
+background: #f2f3f5;
+cursor: default;
+}
+.BoutonJeuImg {
+padding:2px 8px;
+border: none;
+}
+a.BoutonFiches {
+text-decoration:none;
+font-family: 'Jockey One', arial, serif;
+background:#5fc2ee; 
+height: 26px;
+padding: 8px 18px;
+margin:6px 4px 4px 0;
+font-size:18px;
+font-weight:bold;	
+color:#fff;
+display: block;
+background:#5fc2ee;
+text-align: left;
+}
+a.BoutonFiches:hover, a.BoutonFiches:active {
+background:#61cdff;
+}
+.DivBouton{
+margin-top:8px
+}
+.ChoixActif
+{
+color: #54bef0;    
+font-family: arial, serif;
+font-size:16px;
+font-weight:bold;
+text-decoration: none
+}
+.Choix
+{
+font-family: arial, serif;
+color:#505050;
+font-size:14px;
+text-decoration: none
+}
+.ChoixSurvol {
+color: #20a000 	;	
+font-family: arial, serif;
+font-size:14px;
+text-decoration: none;
+}
+.ChoixInhibe{
+font-family: arial, serif;
+color:#CCCCCC;
+font-size:14px;
+text-decoration: none
+}
+.BInput{
+background-color:#c6e6f5;
+}
+.Label{
+color:#505050;
+}
+.EnBleu {
+color:#019fe8;
+}
+.LeFooter {
+Font-family:Tahoma, Arial;
+color:#505050;
+font-size:10px;
+}
+.LeFooter A {
+color:#505050;
+text-decoration:underline;
+}
+.LeFooter A:hover {
+color:Red;
+}
+
+
+/*---pages de lancement---*/
+.Liste {
+width:290px;
+height:110px;
+background-color:#ffffff;
+overflow:auto;	
+font-size:12px;	
+color:#0040a0;
+border-width:0;
+}
+.Liste2 {
+width:614px;
+height:110px;
+background-color:#ffffff;
+overflow:auto;
+font-size:12px;	
+color:#0040a0;
+}
+.ListeAge {
+font-family: arial, serif;
+color:#019fe8;
+font-size:12px;
+}
+.ListeLien {
+font-family: arial, serif;
+font-size:12px;
+}
+#Description  {
+width:930px;
+height:106px;
+text-align:justify;
+background-color:#f2f3f5; 
+padding: 3px 3px 3px 3px;
+}
+.Surveille1{
+font-family: 'Jockey One', arial, serif;
+color:#ffffff;
+font-size:20px;
+}
+.Surveille2{
+font-family: 'Jockey One', arial, serif;
+color:#ffffff;
+font-size:18px;
+}
+.Joueur{
+font-family: 'Jockey One', arial, serif;
+color:#54bef0;
+font-size:25px;
+font-weight:bold;
+}
+.Joueur2{
+font-family: 'Jockey One', arial, serif;
+color:#54bef0;
+font-size:20px;
+font-weight:bold;
+}
+.Joueur3{
+font-family: 'Jockey One', arial, serif;
+color:#54bef0;
+font-size:17px;
+}
+.Description
+{
+font-family: arial, serif;
+color:#505050;
+font-size:14px;
+}
+a.Lien {
+font-family: 'Jockey One', arial, serif;
+color:#1990c7;
+font-size:16px;
+text-decoration:underline;
+cursor:pointer;
+}
+a.Lien:hover {
+color:#505050;
+}
+a.LienInTexte {
+font-family: 'Jockey One', arial, serif;
+color:#019fe8;
+font-size:14px;
+line-height:0px;
+text-decoration:underline;
+}
+a.LienInTexte:hover {
+color:#505050;
+}
+a.LienGros {
+font-family: 'Jockey One', arial, serif;
+color:#505050;
+text-transform:uppercase;
+text-decoration:underline;
+font-size:24px;
+}
+a.LienGros:hover {
+color:#019fe8;
+}
+.Saisie {
+font-size:18px;
+}
+.Enum{
+line-height:25px;
+color:#505050;
+padding-left:20px;
+text-transform:none
+}
+.webmaster{
+color:#00e020;
+}
+.webmaster2{
+background-color:#00e020;
+}
+.Actus {
+	width:780px;
+	word-spacing:5px;
+	font-family: 'Jockey One', arial, serif;
+	color:#505050;
+	font-size:15px;
+	line-height:18px;
+	padding : 10px 10px 10px 10px;
+}
+.DivJeu {
+	background: url('images/degrade_plateau.jpg') no-repeat #fff;
+	background-position: bottom;
+	width:736px;
+}
+.Asterisque {
+background-color:#f2f3f5;
+font-size:30px;
+font-weihgt:bold;
+}
+.Comment {
+background-color:#f2f3f5;
+font-size:18px;
+}
+.Rubrique {
+font-size:24px;
+text-transform:uppercase;
+font-family: 'Jockey One', arial, serif;
+color:#019fe8;
+}
+.Rubrique2 {
+font-size:20px;
+text-transform:uppercase;
+font-family: 'Jockey One', arial, serif;
+}
+.Rubrique3 {
+font-size:20px;
+text-transform:uppercase;
+background-color:#c6e6f5;
+font-family: 'Jockey One', arial, serif;
+}
+a.LienRubrique {
+font-size:20px;
+text-transform:uppercase;
+font-family: 'Jockey One', arial, serif;
+color:#000000;
+line-height:0px
+font-weight:bold;	
+text-decoration:underline;
+}
+a.LienRubrique:hover {
+color:#019fe8;
+}
+.CadrePoker {
+position:absolute;
+z-index:10;
+background:#FFFFFF;
+color:#505050;
+visibility:hidden;
+padding:3px 6px 6px 3px;
+border-style:solid;
+border-width:1px;
+text-align:left;
+}
+.CadreComp {
+position:absolute;
+z-index:10;
+background:#c6e6f5;
+color:#505050;
+visibility:hidden;
+padding:3px 6px 6px 3px;
+border-style:solid;
+border-width:1px;
+text-align:left;
+font-size:17px;
+}
+.CadreComp2 {
+position:absolute;
+z-index:10;
+color:#505050;
+visibility:hidden;
+padding:0 0 0 0;
+border-style:solid;
+border-width:2px;
+}
+.CadreComp3 {
+position:absolute;
+z-index:10;
+color:#505050;
+visibility:hidden;
+}
+#SPModeLectureMagneto{
+background:url("images/magneto/encart.jpg") no-repeat #fff;
+margin-left:10px;
+margin-right:10px;
+}
+.Guide {
+text-align:left;
+background-color:#FFFFFF;
+color:#505050;
+}
+.UnTitre {
+color:#1990c7;
+text-align:left;
+font-size:24px;
+text-transform:uppercase;
+}
+/* ----- chapeau (pour forum)-----*/
+#chapo {
+background:#F3F2ED; 
+border:4px double white;
+padding:0 0 0 0;
+margin:30px 0 30px 0;
+/*css3*/
+border-radius:10px;
+-moz-border-radius:10px;
+-webkit-border-radius:10px;
+box-shadow:3px 3px 6px 2px #A9A9A9;
+-moz-box-shadow:3px 3px 6px 2px #A9A9A9;
+-webkit-box-shadow:3px 3px 6px #A9A9A9;
+text-align:justify;font-family:arial;font-size:28;
+}
+#chapo p {
+line-height:1.5em; 
+text-align:justify;
+}
+#chapo p strong {
+font-size:120%
+}
+#chapo p + p strong, #chapo p.normal strong {
+font-size:100%
+}
+#chapo p:before, #accueil #home .table p:before {
+content:url(images/main3.png) " ";
+}
+#chapo p + p:before, #chapo p.normal:before, #accueil #home .table p + p:before {
+content:"";
+}

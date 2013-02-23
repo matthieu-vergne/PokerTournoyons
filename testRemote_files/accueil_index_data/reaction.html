@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"><head>
+<meta name="robots" content="noindex">
+
+<script async="" src="reaction_data/cbgapi.loaded_0"></script><script gapi_processed="true" src="reaction_data/plusone.js" async="" type="text/javascript"></script><script language="javascript" type="text/javascript" src="accueil_index_data/francais.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<link href="accueil_index_data/css.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" media="screen" type="text/css" href="accueil_index_data/arbitre.css">
+<link rel="stylesheet" media="screen" type="text/css" href="reaction_data/reaction.css">
+<script type="text/javascript" src="reaction_data/prototype.js"></script>
+<script language="javascript">
+var From='Test_moteur_:_Poker';
+function Annuler() {
+	$('Message').value=''
+	$("IdMessage").value=0;
+}
+function EditerMessage(Id) {
+	$("IdMessage").value=Id;
+	$('Operation').value='LitMessage';
+	$('LeForm').request({
+	onComplete: function(transport) {
+		var Retour=transport.responseText.evalJSON();
+		$('Message').value=Retour
+		location.href='#LeTop'
+}})}
+function Envoyer () {
+	if ($('Message').value.length == 0) {alert(CONTACT_1)} else {
+		$("LeMessage").value=URLEncode($("Message").value);		
+		$('Operation').value='AjtMessage';		
+		$('LeForm').request({
+		onComplete: function(transport) {
+			var Retour=transport.responseText.evalJSON();
+			parent.document.getElementById('MailWebM').innerHTML=Retour
+			$("IdMessage").value=0;
+			//alert("Merci, du fait de congés, ces informations seront prises en compte en compte lundi 31 décembre.");
+			UserRefresh();	
+}})}}
+function SupprimerMessage (Id) {
+	$("IdMessage").value=Id;
+	$('Operation').value='SupprimerMessage';		
+	$('LeForm').request({
+	onComplete: function(transport) {
+		$("IdMessage").value=0;
+		UserRefresh();	
+}})}
+
+function UserRefresh() {
+	Adresse=location.href;
+	if (Adresse.indexOf("#")>0) {Adresse=Adresse.substring(0,Adresse.indexOf("#"));}
+	location.href=Adresse;
+}
+function URLEncode (clearString) {
+  var output = '';
+  var x = 0;
+  clearString = clearString.toString();
+  var regex = /(^[a-zA-Z0-9_.]*)/;
+  while (x < clearString.length) {
+    var match = regex.exec(clearString.substr(x));
+    if (match != null && match.length > 1 && match[1] != '') {
+    	output += match[1];
+      x += match[1].length;
+    } else {
+      if (clearString[x] == ' ')
+        output += '+';
+      else {
+        var charCode = clearString.charCodeAt(x);
+        var hexVal = charCode.toString(16);
+        output += '%' + ( hexVal.length < 2 ? '0' : '' ) + hexVal.toUpperCase();
+      }
+      x++;    }  }
+  return output;}
+  
+window.___gcfg = {lang: 'fr'};
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</head><body>
+	<a name="LeTop"></a>
+	<br><center>
+	<div style="width:90%;text-align:left;font-size:20px;color:#505050;text-transform:uppercase;">
+	Une réaction ou une question ? (restera visible et modifiable jusqu'à sa prise en compte)	<div style="float:right;font-size:15px;text-transform:none">Voir aussi 	<a class="Lien" href="http://tournoyons.com/forum/forum.php" target="_top">le forum</a></div><br>
+	<textarea id="Message" name="Message" class="saisie"></textarea><br>
+	<input value="Annuler" onclick="Annuler()" type="button"> <input value="Valider" onclick="Envoyer()" type="button">
+		<div style="float:right;text-transform:none">
+	<table><tbody><tr><td><!--<g:plusone size="medium" annotation="inline"></g:plusone><BR>-->
+	<iframe src="reaction_data/like.html" style="border:none; overflow:hidden; width:500px; height:20px;" allowtransparency="true" frameborder="0" scrolling="no"></iframe></td>
+	<td valign="top">
+	<a href="http://www.facebook.com/tournoyons" title="Facebook" target="top"><img src="reaction_data/facebook_icon.png" height="26px" border="0"></a>
+	<a href="http://www.twitter.com/Tournoyons" title="Twitter" target="top"><img src="reaction_data/twitter_icon.png" height="26px" border="0"></a>
+	<a href="https://plus.google.com/109922197341713204199/posts" title="GooglePlus" target="top"><img src="reaction_data/googleplus_icon.png" height="26px" border="0"></a>
+	</td>
+	</tr></tbody></table></div><div style="clear:both;display:block"></div>
+		</div>
+	</center>
+<div style="padding-left:20px;padding-top:10px;color:#505050;">
+Aucune intervention récente ...</div>
+<form id="LeForm" action="reaction_pourform.php">
+<input name="IdMessage" id="IdMessage" value="0" type="hidden">
+<input name="IdSession" id="IdSession" value="26496" type="hidden">
+<input name="IdUser" id="IdUser" value="0" type="hidden">
+<input name="LeMessage" id="LeMessage" value="---" type="hidden">
+<input name="LeFrom" id="LeFrom" value="Test_moteur_:_Poker" type="hidden">
+<input name="Operation" id="Operation" value="" type="hidden">
+</form>
+
+</body></html>
