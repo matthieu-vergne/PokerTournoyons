@@ -61,13 +61,9 @@ for($i = 13 ; $i < $betStart ; $i += 2) {
 	$trayCards[] = new Card(substr($tray, $i, 2));
 }
 $isFirstToBet = substr($tray, $betStart + 1, 1) == '?';
-if ($isFirstToBet) {
-	$betStart ++;
-} else {
-	// no extra character.
-}
+$betStart += $isFirstToBet ? 2 : 1;
 $bets = array();
-$split = explode('-', substr($tray, $betStart + 1));
+$split = explode('-', substr($tray, $betStart));
 $bets[1] = $split[0];
 $bets[2] = $split[1];
 
