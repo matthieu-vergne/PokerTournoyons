@@ -1,22 +1,18 @@
 <?php
-//Entrées
 $game = $_REQUEST['Game']; //On récupère le nom de partie
 $moveId = $_REQUEST['MoveId']; //On récupère le MoveId
 $referee = $_REQUEST['Referee']; //On récupère l'URL de l'arbitre
 
-//Elaboration du jeu
+// decision making
 $value = mt_rand(1,3);
 
-//On choisit son coup
-
-//Sorties : On construit l'URL cible
-$url = "$referee?Game=$game&MoveId=$moveId&Value=$value";
-
-//On transmet à l'arbitre
+// send results
 if ($referee=='') {
-	print $value;
+	$time = date('Y-m-d H:i:s', filemtime(__FILE__));
+	$commit = htmlspecialchars(exec('git log -1 --pretty=format:"%h - %s"'));
+	echo "$value<br/>($time - $commit)";
 } else {
+	$url = "$referee?Game=$game&MoveId=$moveId&Value=$value";
 	fopen($url,"r");
 }
-//si fopen pose problème, essayer readfile()
 ?>
