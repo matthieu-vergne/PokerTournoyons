@@ -1,4 +1,9 @@
 <?php
+if (empty($_SERVER['QUERY_STRING'])) {
+	echo "[<a href='test.html'>Local test</a>] [<a href='testRemote.html'>Remote test</a>]";
+	exit(0);
+}
+
 /**************************************\
            INITIAL SETTING
 \**************************************/
