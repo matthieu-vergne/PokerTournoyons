@@ -24,6 +24,7 @@ set_exception_handler('exception_handler');
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+include_once('Format.php');
 include_once('card.php');
 
 /**************************************\
@@ -85,9 +86,9 @@ if ($referee == null) {
 	echo "Rank: $rank (player $player)<br/>";
 	echo "Resulted turns: $resultedTurns<br/>";
 	echo "Step: $step<br/>";
-	echo "Cards 1: ".print_r($cards[1], true)."<br/>";
-	echo "Cards 2: ".print_r($cards[2], true)."<br/>";
-	echo "Tray cards: ".print_r($trayCards, true)."<br/>";
+	echo "Cards 1: ".Format::arrayToString($cards[1])."<br/>";
+	echo "Cards 2: ".Format::arrayToString($cards[2])."<br/>";
+	echo "Tray cards: ".Format::arrayToString($trayCards)."<br/>";
 	echo "First to bet? ".($isFirstToBet ? 'Yes' : 'No')."<br/>";
 	echo "Bets: ".print_r($bets, true)."<br/>";
 	echo "Turn: $turn<br/>";
