@@ -81,5 +81,39 @@ class Card {
 	public function __toString() {
 		return $this->type.$this->rank;
 	}
+	
+	public function getValue() {
+		switch($this->rank) {
+			case Card::V_2:
+				return 2;
+			case Card::V_3:
+				return 3;
+			case Card::V_4:
+				return 4;
+			case Card::V_5:
+				return 5;
+			case Card::V_6:
+				return 6;
+			case Card::V_7:
+				return 7;
+			case Card::V_8:
+				return 8;
+			case Card::V_9:
+				return 9;
+			case Card::V_10:
+				return 10;
+			case Card::V_JACK:
+				return 11;
+			case Card::V_QUEEN:
+				return 12;
+			case Card::V_KING:
+				return 13;
+			case Card::V_AS:
+			case Card::V_AS2:
+				return 14;
+			default:
+				throw new Exception("This case should not happen (rank ".$this->rank.").");
+		}
+	}
 }
 ?>
