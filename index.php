@@ -85,7 +85,7 @@ if ($referee == null) {
 	echo "<br/>";
 	echo "($time - $commit)<br/>";
 	echo "<br/>";
-	echo "Gains: ".print_r($gains, true)."<br/>";
+	echo "Gains: ".Format::arrayWithKeysToString($gains)."<br/>";
 	echo "Game: $game<br/>";
 	echo "Rank: $rank (dealer $dealer)<br/>";
 	echo "Resulted turns: $resultedTurns<br/>";
