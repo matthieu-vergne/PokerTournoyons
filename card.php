@@ -115,5 +115,11 @@ class Card {
 				throw new Exception("This case should not happen (rank ".$this->rank.").");
 		}
 	}
+	
+	public function compareTo(Card $card) {
+		$v1 = $this->getValue();
+		$v2 = $card->getValue();
+		return ($v1 > $v2) ? 1 : ($v1 < $v2) ? -1 : 0;
+	}
 }
 ?>
