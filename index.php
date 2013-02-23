@@ -48,7 +48,7 @@ $set = $getParameter('Set');
 $timeout = $getParameter('TimeOut');
 
 $rank = substr($tray, 0, 2);
-$player = (($rank+1) % 2)+1;
+$dealer = (($rank+1) % 2)+1;
 $resultedTurns = substr($tray, 2, 2);
 $step = substr($tray, 4, 1);
 $cards = array();
@@ -87,7 +87,7 @@ if ($referee == null) {
 	echo "<br/>";
 	echo "Gains: ".print_r($gains, true)."<br/>";
 	echo "Game: $game<br/>";
-	echo "Rank: $rank (player $player)<br/>";
+	echo "Rank: $rank (dealer $dealer)<br/>";
 	echo "Resulted turns: $resultedTurns<br/>";
 	echo "Step: $step<br/>";
 	echo "Cards 1: ".Format::arrayToString($cards[1])."<br/>";
