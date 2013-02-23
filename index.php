@@ -24,6 +24,8 @@ set_exception_handler('exception_handler');
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+include_once('card.php');
+
 /**************************************\
            PARAMETERS READING
 \**************************************/
@@ -49,14 +51,14 @@ $player = (($rank+1) % 2)+1;
 $resultedTurns = substr($tray, 2, 2);
 $step = substr($tray, 4, 1);
 $cards = array();
-$cards[1][1] = substr($tray, 5, 2);
-$cards[1][2] = substr($tray, 7, 2);
-$cards[2][1] = substr($tray, 9, 2);
-$cards[2][2] = substr($tray, 11, 2);
+$cards[1][1] = new Card(substr($tray, 5, 2));
+$cards[1][2] = new Card(substr($tray, 7, 2));
+$cards[2][1] = new Card(substr($tray, 9, 2));
+$cards[2][2] = new Card(substr($tray, 11, 2));
 $betStart = strpos($tray, 'M');
 $trayCards = array();
 for($i = 13 ; $i < $betStart ; $i += 2) {
-	$trayCards[] = substr($tray, $i, 2);
+	$trayCards[] = new Card(substr($tray, $i, 2));
 }
 $isFirstToBet = substr($tray, $betStart + 1, 1) == '?';
 if ($isFirstToBet) {
