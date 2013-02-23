@@ -81,6 +81,8 @@ if ($referee == null) {
 	$time = date('Y-m-d H:i:s', filemtime(__FILE__));
 	$commit = htmlspecialchars(exec('git log -1 --pretty=format:"%h - %s"'));
 	$source = $_SERVER['QUERY_STRING'];
+	echo "($time - $commit)<br/>";
+	echo "<br/>";
 	echo "Gains: ".print_r($gains, true)."<br/>";
 	echo "Game: $game<br/>";
 	echo "Rank: $rank (player $player)<br/>";
@@ -90,18 +92,15 @@ if ($referee == null) {
 	echo "Cards 2: ".Format::arrayToString($cards[2])."<br/>";
 	echo "Tray cards: ".Format::arrayToString($trayCards)."<br/>";
 	echo "First to bet? ".($isFirstToBet ? 'Yes' : 'No')."<br/>";
-	echo "Bets: ".print_r($bets, true)."<br/>";
+	echo "Bets: ".Format::arrayWithKeysToString($bets)."<br/>";
 	echo "Turn: $turn<br/>";
-	echo "Moves: ".print_r($moves, true)."<br/>";
+	echo "Moves: ".Format::arrayWithKeysToString($moves)."<br/>";
 	echo "Move ID: $moveId<br/>";
 	echo "Opponent: $opponent<br/>";
 	echo "Set: $set<br/>";
 	echo "Timeout: $timeout<br/>";
 	echo "<br/>";
 	echo "Value: $value<br/>";
-	echo "<br/>";
-	echo "($time - $commit)<br/>";
-	echo "Source: $source<br/>";
 } else {
 	$url = "$referee?Game=$game&MoveId=$moveId&Login=$login&Value=$value";
 	fopen($url,"r");
